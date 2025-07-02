@@ -1,13 +1,32 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Play, Users, Smartphone, Globe, Star, ArrowRight, CheckCircle } from "lucide-react";
+import { Play, Users, Smartphone, Globe, Star, ArrowRight, CheckCircle, Moon, Sun } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
+import { Link } from "react-router-dom";
 
 const Index = () => {
+  const { theme, toggleTheme } = useTheme();
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white dark:from-gray-900 dark:to-gray-800">
+      {/* Theme Toggle */}
+      <div className="absolute top-4 right-4 z-10">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={toggleTheme}
+          className="h-9 w-9"
+        >
+          {theme === 'light' ? (
+            <Moon className="h-4 w-4" />
+          ) : (
+            <Sun className="h-4 w-4" />
+          )}
+        </Button>
+      </div>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 text-white">
         <div className="absolute inset-0 bg-black/10"></div>
@@ -27,9 +46,11 @@ const Index = () => {
               Gamified civic education meets future-ready skills development.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button size="lg" className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-4 text-lg">
-                <Play className="mr-2 h-5 w-5" />
-                Start Your Journey
+              <Button asChild size="lg" className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-4 text-lg">
+                <Link to="/auth">
+                  <Play className="mr-2 h-5 w-5" />
+                  Start Your Journey
+                </Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-orange-600 px-8 py-4 text-lg">
                 Watch Demo
@@ -40,40 +61,40 @@ const Index = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-3xl font-bold text-orange-600 mb-2">50K+</div>
-              <div className="text-gray-600">Young Leaders</div>
+              <div className="text-gray-600 dark:text-gray-300">Young Leaders</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-teal-600 mb-2">15</div>
-              <div className="text-gray-600">African Countries</div>
+              <div className="text-gray-600 dark:text-gray-300">African Countries</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-yellow-600 mb-2">500+</div>
-              <div className="text-gray-600">Communities Transformed</div>
+              <div className="text-gray-600 dark:text-gray-300">Communities Transformed</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-orange-600 mb-2">Offline</div>
-              <div className="text-gray-600">Access Available</div>
+              <div className="text-gray-600 dark:text-gray-300">Access Available</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* User Story Section */}
-      <section className="py-20 bg-gradient-to-r from-teal-50 to-orange-50">
+      <section className="py-20 bg-gradient-to-r from-teal-50 to-orange-50 dark:from-gray-700 dark:to-gray-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Meet Amina's Story</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Meet Amina's Story</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               From passionate youth to community leader - see how CivicRise transforms lives
             </p>
           </div>
           
-          <Card className="max-w-4xl mx-auto bg-white shadow-xl">
+          <Card className="max-w-4xl mx-auto bg-white dark:bg-gray-800 shadow-xl">
             <CardHeader className="text-center">
               <div className="w-20 h-20 bg-gradient-to-r from-orange-400 to-yellow-400 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
                 A
@@ -83,22 +104,22 @@ const Index = () => {
             <CardContent className="space-y-6">
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <h4 className="font-semibold text-lg mb-3 text-gray-700">Before CivicRise:</h4>
-                  <p className="text-gray-600">
+                  <h4 className="font-semibold text-lg mb-3 text-gray-700 dark:text-gray-300">Before CivicRise:</h4>
+                  <p className="text-gray-600 dark:text-gray-400">
                     Passionate about community issues but felt disconnected from formal politics. 
                     Had entrepreneurial dreams but lacked digital skills and civic knowledge.
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-lg mb-3 text-orange-600">After CivicRise:</h4>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 dark:text-gray-400">
                     Learned governance through games, earned digital skills, launched a waste management 
                     initiative, and now trains others while considering local office.
                   </p>
                 </div>
               </div>
               <Separator />
-              <blockquote className="text-center italic text-lg text-gray-700 border-l-4 border-orange-400 pl-6">
+              <blockquote className="text-center italic text-lg text-gray-700 dark:text-gray-300 border-l-4 border-orange-400 pl-6">
                 "CivicRise didn't just teach me about government—it showed me I AM the government. 
                 My community, my responsibility, my power."
               </blockquote>
@@ -108,17 +129,17 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">How CivicRise Works</h2>
-            <p className="text-xl text-gray-600">Gamified learning that creates real-world impact</p>
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">How CivicRise Works</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300">Gamified learning that creates real-world impact</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center hover:shadow-lg transition-shadow">
+            <Card className="text-center hover:shadow-lg transition-shadow dark:bg-gray-700">
               <CardHeader>
-                <div className="w-16 h-16 bg-orange-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900 rounded-full mx-auto mb-4 flex items-center justify-center">
                   <Play className="h-8 w-8 text-orange-600" />
                 </div>
                 <CardTitle className="text-xl">Gamified Learning</CardTitle>
@@ -131,9 +152,9 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="text-center hover:shadow-lg transition-shadow">
+            <Card className="text-center hover:shadow-lg transition-shadow dark:bg-gray-700">
               <CardHeader>
-                <div className="w-16 h-16 bg-teal-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <div className="w-16 h-16 bg-teal-100 dark:bg-teal-900 rounded-full mx-auto mb-4 flex items-center justify-center">
                   <Smartphone className="h-8 w-8 text-teal-600" />
                 </div>
                 <CardTitle className="text-xl">Mobile-First & Offline</CardTitle>
@@ -146,9 +167,9 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="text-center hover:shadow-lg transition-shadow">
+            <Card className="text-center hover:shadow-lg transition-shadow dark:bg-gray-700">
               <CardHeader>
-                <div className="w-16 h-16 bg-yellow-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <div className="w-16 h-16 bg-yellow-100 dark:bg-yellow-900 rounded-full mx-auto mb-4 flex items-center justify-center">
                   <Users className="h-8 w-8 text-yellow-600" />
                 </div>
                 <CardTitle className="text-xl">Community Action</CardTitle>
@@ -218,9 +239,11 @@ const Index = () => {
             Your journey starts with a single step.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-orange-600 hover:bg-orange-700 px-8 py-4 text-lg">
-              Start Learning Today
-              <ArrowRight className="ml-2 h-5 w-5" />
+            <Button asChild size="lg" className="bg-orange-600 hover:bg-orange-700 px-8 py-4 text-lg">
+              <Link to="/auth">
+                Start Learning Today
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
             </Button>
             <Button size="lg" variant="outline" className="border-gray-500 text-gray-300 hover:bg-gray-800 px-8 py-4 text-lg">
               Join Our Community
