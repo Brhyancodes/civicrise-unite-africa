@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
+import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
-import { Trophy, BookOpen, Users, Target } from 'lucide-react';
+import { Trophy, BookOpen, Users, Target, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface UserProgress {
   id: string;
@@ -176,9 +178,17 @@ export const Dashboard = () => {
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-muted-foreground">
-                No lessons completed yet. Start your journey today!
-              </p>
+              <div className="text-center space-y-4">
+                <p className="text-sm text-muted-foreground">
+                  No lessons completed yet. Start your journey today!
+                </p>
+                <Button asChild>
+                  <Link to="/lessons" className="flex items-center space-x-2">
+                    <span>Start Learning</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
             )}
           </CardContent>
         </Card>

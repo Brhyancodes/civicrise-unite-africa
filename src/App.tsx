@@ -10,6 +10,7 @@ import { Header } from "@/components/layout/Header";
 import { Dashboard } from "@/components/dashboard/Dashboard";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
+import Lessons from "./pages/Lessons";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -60,6 +61,11 @@ const AppContent = () => {
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/lessons" element={
+          <ProtectedRoute>
+            <Lessons />
           </ProtectedRoute>
         } />
         <Route path="*" element={<NotFound />} />
