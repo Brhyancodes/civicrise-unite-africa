@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -42,7 +43,6 @@ export const LessonContent: React.FC<LessonContentProps> = ({ lesson, onComplete
   const [answers, setAnswers] = useState<{ [key: string]: number }>({});
   const [showResults, setShowResults] = useState(false);
   const [currentAnswer, setCurrentAnswer] = useState<string>('');
-  const [showVideos, setShowVideos] = useState(false);
   const { isChatVisible, isMinimized, toggleChat } = useAIChat();
 
   const isContentStep = currentStep === 0;
@@ -51,6 +51,14 @@ export const LessonContent: React.FC<LessonContentProps> = ({ lesson, onComplete
   const currentQuestion = lesson.questions[currentStep - questionStartIndex];
   const totalSteps = lesson.questions.length + (lesson.videos && lesson.videos.length > 0 ? 2 : 1);
   const progress = (currentStep / totalSteps) * 100;
+
+  const openYouTubeVideo = (youtubeId: string) => {
+    window.open(`https://www.youtube.com/watch?v=${youtubeId}`, '_blank');
+  };
+
+  const openYouTubeRecommendation = (youtubeId: string) => {
+    window.open(`https://www.youtube.com/watch?v=${youtubeId}`, '_blank');
+  };
 
   const handleNext = () => {
     if (currentStep === 0) {
@@ -156,7 +164,11 @@ export const LessonContent: React.FC<LessonContentProps> = ({ lesson, onComplete
               </h3>
               <div className="grid gap-4 md:grid-cols-2">
                 {lesson.youtubeRecommendations.map((video) => (
-                  <Card key={video.id} className="hover-scale cursor-pointer transition-transform">
+                  <Card 
+                    key={video.id} 
+                    className="hover-scale cursor-pointer transition-transform"
+                    onClick={() => openYouTubeRecommendation(video.youtubeId)}
+                  >
                     <CardContent className="p-4">
                       <div className="flex items-start space-x-3">
                         <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -261,7 +273,11 @@ export const LessonContent: React.FC<LessonContentProps> = ({ lesson, onComplete
                             <p className="text-muted-foreground mb-3">{video.description}</p>
                             <div className="flex items-center justify-between">
                               <span className="text-sm font-medium text-red-600">{video.duration}</span>
-                              <Button size="sm" className="gap-2">
+                              <Button 
+                                size="sm" 
+                                className="gap-2"
+                                onClick={() => openYouTubeVideo(video.youtubeId)}
+                              >
                                 <Youtube className="h-4 w-4" />
                                 Watch on YouTube
                                 <ExternalLink className="h-3 w-3" />

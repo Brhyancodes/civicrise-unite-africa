@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { supabase } from '@/integrations/supabase/client';
-import { Bot, User, Send, Loader2, MessageCircle, X } from 'lucide-react';
+import { Bot, User, Send, Loader2, MessageCircle, X, AlertCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface Message {
@@ -13,6 +13,7 @@ interface Message {
   content: string;
   isUser: boolean;
   timestamp: Date;
+  isError?: boolean;
 }
 
 interface AIChatProps {
@@ -58,18 +59,31 @@ export const AIChat: React.FC<AIChatProps> = ({
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const currentMessage = inputMessage;
     setInputMessage('');
     setIsLoading(true);
 
     try {
+      console.log('Sending message to AI:', currentMessage);
+      console.log('Lesson context:', lessonContext);
+
       const { data, error } = await supabase.functions.invoke('ai-chat', {
         body: {
-          message: inputMessage,
+          message: currentMessage,
           context: lessonContext
         }
       });
 
-      if (error) throw error;
+      console.log('AI response data:', data);
+      console.log('AI response error:', error);
+
+      if (error) {
+        throw new Error(error.message || 'Failed to get AI response');
+      }
+
+      if (!data || !data.response) {
+        throw new Error('No response received from AI assistant');
+      }
 
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -81,9 +95,20 @@ export const AIChat: React.FC<AIChatProps> = ({
       setMessages(prev => [...prev, aiMessage]);
     } catch (error) {
       console.error('Error sending message:', error);
+      
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: `I'm sorry, I'm having trouble responding right now. This might be because the OpenAI API key hasn't been configured yet. Please make sure the API key is set up properly. Error: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        isUser: false,
+        timestamp: new Date(),
+        isError: true
+      };
+
+      setMessages(prev => [...prev, errorMessage]);
+      
       toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
+        title: "AI Assistant Error",
+        description: "Failed to get response. Please check if OpenAI API key is configured.",
         variant: "destructive",
       });
     } finally {
@@ -144,14 +169,24 @@ export const AIChat: React.FC<AIChatProps> = ({
                 <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${
                   message.isUser 
                     ? 'bg-primary text-white' 
-                    : 'bg-muted text-muted-foreground'
+                    : message.isError
+                      ? 'bg-red-100 text-red-600'
+                      : 'bg-muted text-muted-foreground'
                 }`}>
-                  {message.isUser ? <User className="h-3 w-3" /> : <Bot className="h-3 w-3" />}
+                  {message.isUser ? (
+                    <User className="h-3 w-3" />
+                  ) : message.isError ? (
+                    <AlertCircle className="h-3 w-3" />
+                  ) : (
+                    <Bot className="h-3 w-3" />
+                  )}
                 </div>
                 <div className={`max-w-[70%] rounded-lg p-2 text-sm ${
                   message.isUser
                     ? 'bg-primary text-white'
-                    : 'bg-muted'
+                    : message.isError
+                      ? 'bg-red-50 text-red-700 border border-red-200'
+                      : 'bg-muted'
                 }`}>
                   {message.content}
                 </div>
