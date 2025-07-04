@@ -1,4 +1,3 @@
-
 export interface Question {
   id: string;
   question: string;
@@ -196,6 +195,300 @@ export const lessons: Lesson[] = [
         ],
         correctAnswer: 1,
         explanation: 'Power analysis involves identifying who has the authority to make decisions about the issues you care about, which helps you target your advocacy efforts effectively.'
+      }
+    ]
+  },
+  {
+    id: 'digital-basics',
+    title: 'Digital Literacy Fundamentals',
+    description: 'Master the essential digital skills needed in today\'s connected world.',
+    duration: '20 min',
+    difficulty: 'Beginner',
+    topics: ['Digital Skills', 'Internet Basics', 'Computer Skills', 'Online Safety'],
+    content: `
+      <h2>What is Digital Literacy?</h2>
+      <p>Digital literacy refers to the ability to use, understand, and create digital technology effectively and responsibly.</p>
+      
+      <h3>Core Components of Digital Literacy</h3>
+      <ul>
+        <li><strong>Technical Skills:</strong> Operating devices and software</li>
+        <li><strong>Information Literacy:</strong> Finding, evaluating, and using information</li>
+        <li><strong>Communication Skills:</strong> Interacting effectively online</li>
+        <li><strong>Digital Citizenship:</strong> Understanding rights and responsibilities online</li>
+      </ul>
+      
+      <h3>Essential Digital Skills</h3>
+      <p>Key skills every digital citizen should master:</p>
+      <ul>
+        <li>Basic computer operations (keyboard, mouse, touchscreen)</li>
+        <li>Internet browsing and search techniques</li>
+        <li>Email communication</li>
+        <li>File management and organization</li>
+        <li>Understanding of privacy and security settings</li>
+        <li>Social media awareness and etiquette</li>
+      </ul>
+      
+      <h3>Why Digital Literacy Matters</h3>
+      <ul>
+        <li>Access to information and services</li>
+        <li>Employment opportunities</li>
+        <li>Social connection and communication</li>
+        <li>Civic participation in the digital age</li>
+        <li>Personal safety and security online</li>
+      </ul>
+    `,
+    questions: [
+      {
+        id: 'q1',
+        question: 'What is digital literacy?',
+        options: [
+          'The ability to read books on electronic devices',
+          'The ability to use, understand, and create digital technology effectively',
+          'The ability to type quickly on a keyboard',
+          'The ability to fix computer hardware'
+        ],
+        correctAnswer: 1,
+        explanation: 'Digital literacy encompasses the comprehensive ability to use, understand, and create digital technology effectively and responsibly.'
+      },
+      {
+        id: 'q2',
+        question: 'Which is NOT mentioned as a core component of digital literacy?',
+        options: [
+          'Technical Skills',
+          'Information Literacy',
+          'Hardware Repair',
+          'Digital Citizenship'
+        ],
+        correctAnswer: 2,
+        explanation: 'Hardware repair is a specialized technical skill, but not considered a core component of general digital literacy.'
+      }
+    ]
+  },
+  {
+    id: 'online-safety',
+    title: 'Online Safety and Privacy',
+    description: 'Learn how to protect yourself and your personal information online.',
+    duration: '25 min',
+    difficulty: 'Beginner',
+    topics: ['Privacy', 'Security', 'Scams', 'Password Safety'],
+    content: `
+      <h2>Online Safety Fundamentals</h2>
+      <p>Staying safe online requires understanding potential risks and taking proactive steps to protect yourself.</p>
+      
+      <h3>Common Online Threats</h3>
+      <ul>
+        <li><strong>Phishing:</strong> Fake emails or websites designed to steal information</li>
+        <li><strong>Malware:</strong> Malicious software that can harm your device</li>
+        <li><strong>Identity Theft:</strong> Unauthorized use of your personal information</li>
+        <li><strong>Social Engineering:</strong> Manipulating people to reveal sensitive information</li>
+        <li><strong>Cyberbullying:</strong> Harassment through digital platforms</li>
+      </ul>
+      
+      <h3>Password Security Best Practices</h3>
+      <ul>
+        <li>Use strong, unique passwords for each account</li>
+        <li>Include a mix of letters, numbers, and symbols</li>
+        <li>Avoid personal information in passwords</li>
+        <li>Enable two-factor authentication when available</li>
+        <li>Consider using a reputable password manager</li>
+      </ul>
+      
+      <h3>Privacy Protection Tips</h3>
+      <ul>
+        <li>Review and adjust social media privacy settings</li>
+        <li>Be cautious about sharing personal information</li>
+        <li>Understand what data websites collect</li>
+        <li>Use secure networks for sensitive activities</li>
+        <li>Regularly update software and security settings</li>
+      </ul>
+      
+      <h3>Safe Online Practices</h3>
+      <ul>
+        <li>Verify the authenticity of websites before entering information</li>
+        <li>Think before you click on links or download files</li>
+        <li>Keep personal information private</li>
+        <li>Report suspicious or harmful content</li>
+        <li>Trust your instincts - if something seems too good to be true, it probably is</li>
+      </ul>
+    `,
+    questions: [
+      {
+        id: 'q1',
+        question: 'What is phishing?',
+        options: [
+          'A type of computer virus',
+          'Fake emails or websites designed to steal information',
+          'A method of improving internet speed',
+          'A social media platform'
+        ],
+        correctAnswer: 1,
+        explanation: 'Phishing involves fake emails or websites that appear legitimate but are designed to steal personal information like passwords or credit card numbers.'
+      },
+      {
+        id: 'q2',
+        question: 'Which is the BEST practice for password security?',
+        options: [
+          'Use the same password for all accounts',
+          'Use your birthday as your password',
+          'Use strong, unique passwords for each account',
+          'Write passwords on sticky notes'
+        ],
+        correctAnswer: 2,
+        explanation: 'Using strong, unique passwords for each account is the best practice because it prevents a single breach from compromising all your accounts.'
+      }
+    ]
+  },
+  {
+    id: 'information-evaluation',
+    title: 'Evaluating Online Information',
+    description: 'Develop critical thinking skills to identify reliable information sources online.',
+    duration: '18 min',
+    difficulty: 'Intermediate',
+    topics: ['Critical Thinking', 'Fact-Checking', 'Source Evaluation', 'Media Literacy'],
+    content: `
+      <h2>Information Evaluation in the Digital Age</h2>
+      <p>With the vast amount of information available online, it's crucial to develop skills to distinguish between reliable and unreliable sources.</p>
+      
+      <h3>The CRAAP Test for Source Evaluation</h3>
+      <ul>
+        <li><strong>Currency:</strong> How recent is the information?</li>
+        <li><strong>Relevance:</strong> Does it relate to your topic?</li>
+        <li><strong>Authority:</strong> Who is the author or publisher?</li>
+        <li><strong>Accuracy:</strong> Is the information correct and reliable?</li>
+        <li><strong>Purpose:</strong> Why was this information published?</li>
+      </ul>
+      
+      <h3>Red Flags to Watch For</h3>
+      <ul>
+        <li>Sensational headlines designed to provoke emotion</li>
+        <li>Lack of author information or credentials</li>
+        <li>No sources or references cited</li>
+        <li>Obvious bias or agenda</li>
+        <li>Poor grammar, spelling, or formatting</li>
+        <li>Claims that seem too good to be true</li>
+      </ul>
+      
+      <h3>Fact-Checking Strategies</h3>
+      <ul>
+        <li>Cross-reference information with multiple sources</li>
+        <li>Check the original source of claims</li>
+        <li>Use reputable fact-checking websites</li>
+        <li>Look for peer-reviewed sources when possible</li>
+        <li>Consider the publication date and context</li>
+      </ul>
+      
+      <h3>Types of Reliable Sources</h3>
+      <ul>
+        <li>Established news organizations with editorial standards</li>
+        <li>Academic journals and research publications</li>
+        <li>Government websites and official documents</li>
+        <li>Reputable educational institutions</li>
+        <li>Professional organizations in relevant fields</li>
+      </ul>
+    `,
+    questions: [
+      {
+        id: 'q1',
+        question: 'What does the "A" in the CRAAP test stand for?',
+        options: [
+          'Accuracy and Authority',
+          'Author and Audience',
+          'Accessibility and Availability',
+          'Application and Analysis'
+        ],
+        correctAnswer: 0,
+        explanation: 'In the CRAAP test, the two A\'s stand for Authority (who wrote it) and Accuracy (is the information correct and reliable).'
+      },
+      {
+        id: 'q2',
+        question: 'Which is NOT a red flag when evaluating online information?',
+        options: [
+          'Sensational headlines',
+          'Multiple sources cited',
+          'Lack of author information',
+          'Claims that seem too good to be true'
+        ],
+        correctAnswer: 1,
+        explanation: 'Multiple sources cited is actually a positive sign of reliable information, not a red flag. It shows the author has done research and provided evidence.'
+      }
+    ]
+  },
+  {
+    id: 'digital-communication',
+    title: 'Digital Communication Ethics',
+    description: 'Learn proper etiquette and ethics for digital communication and social media.',
+    duration: '22 min',
+    difficulty: 'Intermediate',
+    topics: ['Digital Etiquette', 'Social Media', 'Online Communication', 'Digital Citizenship'],
+    content: `
+      <h2>Digital Communication and Ethics</h2>
+      <p>Effective and ethical digital communication is essential for building positive relationships and maintaining professionalism online.</p>
+      
+      <h3>Email Etiquette</h3>
+      <ul>
+        <li><strong>Subject Lines:</strong> Clear and descriptive</li>
+        <li><strong>Greeting:</strong> Professional salutation</li>
+        <li><strong>Content:</strong> Concise and well-organized</li>
+        <li><strong>Tone:</strong> Professional and respectful</li>
+        <li><strong>Response Time:</strong> Timely replies when appropriate</li>
+      </ul>
+      
+      <h3>Social Media Best Practices</h3>
+      <ul>
+        <li>Think before you post - consider long-term impact</li>
+        <li>Respect privacy of others</li>
+        <li>Use appropriate language and tone</li>
+        <li>Verify information before sharing</li>
+        <li>Respect intellectual property and give credit</li>
+        <li>Be mindful of your digital footprint</li>
+      </ul>
+      
+      <h3>Online Discussion Guidelines</h3>
+      <ul>
+        <li>Stay on topic and contribute meaningfully</li>
+        <li>Respect different viewpoints and opinions</li>
+        <li>Avoid personal attacks and inflammatory language</li>
+        <li>Use evidence to support your arguments</li>
+        <li>Acknowledge when you're wrong or uncertain</li>
+      </ul>
+      
+      <h3>Digital Citizenship Principles</h3>
+      <ul>
+        <li><strong>Digital Access:</strong> Equal opportunities for technology use</li>
+        <li><strong>Digital Commerce:</strong> Safe and legal online buying and selling</li>
+        <li><strong>Digital Communication:</strong> Appropriate and responsible interaction</li>
+        <li><strong>Digital Literacy:</strong> Teaching and learning about technology</li>
+        <li><strong>Digital Etiquette:</strong> Standards of conduct online</li>
+        <li><strong>Digital Law:</strong> Legal rights and restrictions</li>
+        <li><strong>Digital Rights:</strong> Basic freedoms for all users</li>
+        <li><strong>Digital Security:</strong> Protecting information and identity</li>
+        <li><strong>Digital Health:</strong> Managing screen time and digital wellness</li>
+      </ul>
+    `,
+    questions: [
+      {
+        id: 'q1',
+        question: 'What should you do before sharing information on social media?',
+        options: [
+          'Share it immediately to be first',
+          'Add your opinion to make it more interesting',
+          'Verify the information is accurate',
+          'Make sure it gets lots of likes'
+        ],
+        correctAnswer: 2,
+        explanation: 'It\'s important to verify information before sharing to prevent the spread of misinformation and maintain your credibility.'
+      },
+      {
+        id: 'q2',
+        question: 'Which is NOT one of the digital citizenship principles?',
+        options: [
+          'Digital Access',
+          'Digital Entertainment',
+          'Digital Security',
+          'Digital Health'
+        ],
+        correctAnswer: 1,
+        explanation: 'Digital Entertainment is not one of the core digital citizenship principles. The principles focus on responsible and ethical technology use.'
       }
     ]
   }
