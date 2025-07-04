@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { LessonCard } from '@/components/lessons/LessonCard';
 import { LessonContent } from '@/components/lessons/LessonContent';
@@ -6,6 +5,10 @@ import { lessons } from '@/data/lessons';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { AIChat } from '@/components/ai/AIChat';
+import { useAIChat } from '@/hooks/useAIChat';
+import { Button } from '@/components/ui/button';
+import { Bot } from 'lucide-react';
 
 interface UserProgress {
   lesson_id: string;
@@ -19,6 +22,7 @@ const Lessons = () => {
   const [selectedLesson, setSelectedLesson] = useState<string | null>(null);
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [loading, setLoading] = useState(true);
+  const { isChatVisible, isMinimized, toggleChat } = useAIChat();
 
   useEffect(() => {
     if (user) {
@@ -127,11 +131,21 @@ const Lessons = () => {
 
   return (
     <div className="container mx-auto p-6 space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Civic Education Lessons</h1>
-        <p className="text-muted-foreground mt-2">
-          Build your civic knowledge and skills through interactive lessons
-        </p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold">Civic Education Lessons</h1>
+          <p className="text-muted-foreground mt-2">
+            Build your civic knowledge and skills through interactive lessons
+          </p>
+        </div>
+        <Button
+          onClick={toggleChat}
+          variant="outline"
+          className="gap-2"
+        >
+          <Bot className="h-4 w-4" />
+          Ask AI Assistant
+        </Button>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -143,6 +157,14 @@ const Lessons = () => {
           />
         ))}
       </div>
+
+      {isChatVisible && (
+        <AIChat
+          lessonContext="Lesson selection page - Help users choose appropriate lessons and understand civic education topics"
+          isMinimized={isMinimized}
+          onToggleMinimize={toggleChat}
+        />
+      )}
     </div>
   );
 };

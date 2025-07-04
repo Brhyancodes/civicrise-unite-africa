@@ -1,11 +1,12 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import { ArrowLeft, ArrowRight, CheckCircle, Youtube, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, Youtube, ExternalLink, Bot } from 'lucide-react';
+import { AIChat } from '@/components/ai/AIChat';
+import { useAIChat } from '@/hooks/useAIChat';
 
 interface Question {
   id: string;
@@ -42,6 +43,7 @@ export const LessonContent: React.FC<LessonContentProps> = ({ lesson, onComplete
   const [showResults, setShowResults] = useState(false);
   const [currentAnswer, setCurrentAnswer] = useState<string>('');
   const [showVideos, setShowVideos] = useState(false);
+  const { isChatVisible, isMinimized, toggleChat } = useAIChat();
 
   const isContentStep = currentStep === 0;
   const isVideoStep = currentStep === 1 && lesson.videos && lesson.videos.length > 0;
@@ -92,8 +94,20 @@ export const LessonContent: React.FC<LessonContentProps> = ({ lesson, onComplete
     return (
       <Card className="max-w-4xl mx-auto animate-fade-in">
         <CardHeader className="text-center">
-          <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 animate-scale-in">
-            <CheckCircle className="h-8 w-8 text-green-600" />
+          <div className="flex items-center justify-between mb-4">
+            <div></div>
+            <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center animate-scale-in">
+              <CheckCircle className="h-8 w-8 text-green-600" />
+            </div>
+            <Button
+              onClick={toggleChat}
+              variant="outline"
+              size="sm"
+              className="gap-2"
+            >
+              <Bot className="h-4 w-4" />
+              Ask AI
+            </Button>
           </div>
           <CardTitle className="animate-fade-in">Lesson Complete!</CardTitle>
           <CardDescription className="animate-fade-in">Great job completing "{lesson.title}"</CardDescription>
@@ -171,6 +185,14 @@ export const LessonContent: React.FC<LessonContentProps> = ({ lesson, onComplete
             Back to Lessons
           </Button>
         </CardContent>
+
+        {isChatVisible && (
+          <AIChat
+            lessonContext={`Lesson completed: ${lesson.title}. Score: ${score}%. Available for questions about the lesson content or next steps.`}
+            isMinimized={isMinimized}
+            onToggleMinimize={toggleChat}
+          />
+        )}
       </Card>
     );
   }
@@ -182,8 +204,19 @@ export const LessonContent: React.FC<LessonContentProps> = ({ lesson, onComplete
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back
         </Button>
-        <div className="text-sm text-muted-foreground">
-          Step {currentStep + 1} of {totalSteps}
+        <div className="flex items-center gap-4">
+          <Button
+            onClick={toggleChat}
+            variant="outline"
+            size="sm"
+            className="gap-2"
+          >
+            <Bot className="h-4 w-4" />
+            Need Help?
+          </Button>
+          <div className="text-sm text-muted-foreground">
+            Step {currentStep + 1} of {totalSteps}
+          </div>
         </div>
       </div>
 
@@ -276,6 +309,14 @@ export const LessonContent: React.FC<LessonContentProps> = ({ lesson, onComplete
           <ArrowRight className="h-4 w-4 ml-2" />
         </Button>
       </div>
+
+      {isChatVisible && (
+        <AIChat
+          lessonContext={`Current lesson: ${lesson.title}. ${isContentStep ? 'Reading lesson content' : isVideoStep ? 'Watching videos' : `Answering question ${currentStep - questionStartIndex + 1}`}`}
+          isMinimized={isMinimized}
+          onToggleMinimize={toggleChat}
+        />
+      )}
     </div>
   );
 };

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -6,8 +5,10 @@ import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
-import { Trophy, BookOpen, Users, Target, ArrowRight } from 'lucide-react';
+import { Trophy, BookOpen, Users, Target, ArrowRight, Bot } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { AIChat } from '@/components/ai/AIChat';
+import { useAIChat } from '@/hooks/useAIChat';
 
 interface UserProgress {
   id: string;
@@ -21,6 +22,7 @@ export const Dashboard = () => {
   const { user } = useAuth();
   const [progress, setProgress] = useState<UserProgress[]>([]);
   const [loading, setLoading] = useState(true);
+  const { isChatVisible, isMinimized, toggleChat } = useAIChat();
 
   useEffect(() => {
     if (user) {
@@ -74,9 +76,20 @@ export const Dashboard = () => {
           <h1 className="text-3xl font-bold">Welcome back, {user?.user_metadata?.full_name || 'Civic Leader'}!</h1>
           <p className="text-muted-foreground">Continue your journey to transform communities</p>
         </div>
-        <Badge variant="secondary" className="text-lg px-4 py-2">
-          Level {Math.floor(completedLessons / 5) + 1}
-        </Badge>
+        <div className="flex items-center gap-3">
+          <Button
+            onClick={toggleChat}
+            variant="outline"
+            size="sm"
+            className="gap-2"
+          >
+            <Bot className="h-4 w-4" />
+            Ask AI Assistant
+          </Button>
+          <Badge variant="secondary" className="text-lg px-4 py-2">
+            Level {Math.floor(completedLessons / 5) + 1}
+          </Badge>
+        </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -193,6 +206,14 @@ export const Dashboard = () => {
           </CardContent>
         </Card>
       </div>
+
+      {isChatVisible && (
+        <AIChat
+          lessonContext="Dashboard - General civic education assistance"
+          isMinimized={isMinimized}
+          onToggleMinimize={toggleChat}
+        />
+      )}
     </div>
   );
 };
